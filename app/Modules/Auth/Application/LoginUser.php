@@ -1,33 +1,36 @@
 <?php
 
-namespace App\Modules\Auth\Application;;
+namespace App\Modules\Auth\Application;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Laravel\Passport\Client;
+use App\Modules\Auth\Domain\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class LoginUser
 {
-    public function execute(Request $request)
+    const LOCAL_CLIENT_NAME = 'app';
+
+    public function execute(array $data)
     {
-        $client = Client::where('password_client', 1)->first();
+        // Retrieve the authenticated user
+        $user = User::where('email', $data['email'])->first();
 
-        $request->request->add([
-            'grant_type' => 'password',
-            'client_id' => $client->id,
-            'client_secret' => $client->secret,
-            'username' => $request->username,
-            'password' => $request->password,
-            'scope' => '',
-        ]);
+        // Check if the user exists
+        if (!$user || !Hash::check($data['password'], $user->password)) {
+            return ['error' => 'The provided credentials are incorrect.'];
+        }
 
-        $tokenRequest = Request::create(
-            'oauth/token',
-            'post'
-        );
+        // Generate a new personal access token for the user
+        $tokenResult = $user->createToken('LaravelPassport');
+        $token = $tokenResult->token;
 
-        $response = app()->handle($tokenRequest);
+        // Save the token
+        $token->save();
 
-        return json_decode($response->getContent(), true);
+        // Return the token details
+        return [
+            'access_token' => $tokenResult->accessToken,
+            'token_type' => 'Bearer',
+            'expires_at' => $tokenResult->token->expires_at,
+        ];
     }
 }

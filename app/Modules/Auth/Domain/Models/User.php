@@ -46,20 +46,4 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
-    /**
-     * Find the user instance for the given username.
-     */
-    public function findForPassport(string $username): User | null
-    {
-        return $this->where('email', $username)->first();
-    }
-
-    /**
-     * Validate the password of the user for the Passport password grant.
-     */
-    public function validateForPassportPasswordGrant(string $password): bool
-    {
-        return Hash::check($password, $this->password);
-    }
 }

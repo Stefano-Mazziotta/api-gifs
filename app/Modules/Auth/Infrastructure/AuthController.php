@@ -32,9 +32,12 @@ class AuthController extends Controller
         return response()->json($result, 201);
     }
 
-    public function login(Request $request)
+    public function login(LoginUserRequest $request)
     {
-        $result = $this->_login->execute($request);
+
+        $data = $request->validated();
+
+        $result = $this->_login->execute($data);
 
         if (isset($result['error'])) {
             return response()->json($result, 401);
