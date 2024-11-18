@@ -17,6 +17,11 @@ return new class extends Migration
             $table->boolean('revoked');
             $table->dateTime('expires_at')->nullable();
         });
+
+        // add relation to table oauth_access_tokens
+        Schema::table('oauth_refresh_tokens', function (Blueprint $table) {
+            $table->foreign('access_token_id')->references('id')->on('oauth_access_tokens')->onDelete('cascade');
+        });
     }
 
     /**

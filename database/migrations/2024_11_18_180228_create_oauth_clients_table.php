@@ -23,6 +23,11 @@ return new class extends Migration
             $table->boolean('revoked');
             $table->timestamps();
         });
+
+        // add relation to table user
+        Schema::table('oauth_clients', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
     }
 
     /**

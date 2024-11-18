@@ -1,29 +1,32 @@
 <?php
 
-namespace App\Modules\Auth\Infrastructure\Controllers;
+namespace App\Modules\Auth\Infrastructure;
 
-use App\Http\Controllers\Controller;
+use App\Controller;
+use App\Modules\Auth\Infrastructure\RegisterUserRequest;
 use Illuminate\Http\Request;
-use App\Modules\Auth\Application\UseCases\RegisterUser;
-use App\Modules\Auth\Application\UseCases\LoginUser;
+use App\Modules\Auth\Application\LoginUser;
+use App\Modules\Auth\Application\RegisterUser;
 
 class AuthController extends Controller
 {
-    protected $registerUser;
-    protected $loginUser;
+    protected $_login;
+    protected $_register;
 
-    public function __construct(RegisterUser $registerUser, LoginUser $loginUser)
+    public function __construct(LoginUser $login, RegisterUser $register)
     {
-        $this->registerUser = $registerUser;
-        $this->loginUser = $loginUser;
+        $this->_login = $login;
+        $this->_register = $register;
     }
 
-    public function register(Request $request)
+    public function register(RegisterUserRequest $request)
     {
-        $result = $this->registerUser->execute($request->all());
+        $data = $request->validated();
 
-        if (isset($result['errors'])) {
-            return response()->json($result['errors'], 400);
+        $result = $this->_register->execute($data);
+
+        if (isset($result['error'])) {
+            return response()->json($result, 400);
         }
 
         return response()->json($result, 201);
@@ -31,7 +34,7 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $result = $this->loginUser->execute($request->only('email', 'password'));
+        $result = $this->_login->execute($request);
 
         if (isset($result['error'])) {
             return response()->json($result, 401);

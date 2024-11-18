@@ -1,25 +1,33 @@
 <?php
 
-namespace App\Modules\Auth\Application\UseCases;
+namespace App\Modules\Auth\Application;;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Passport\Client;
 
 class LoginUser
 {
-    public function execute(array $credentials)
+    public function execute(Request $request)
     {
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
+        $client = Client::where('password_client', 1)->first();
 
-            if (!$user) {
-                return ['error' => 'Unauthorized'];
-            }
+        $request->request->add([
+            'grant_type' => 'password',
+            'client_id' => $client->id,
+            'client_secret' => $client->secret,
+            'username' => $request->username,
+            'password' => $request->password,
+            'scope' => '',
+        ]);
 
-            $token = $user->createToken('LaravelPassport')->accessToken;
+        $tokenRequest = Request::create(
+            'oauth/token',
+            'post'
+        );
 
-            return ['token' => $token];
-        } else {
-            return ['error' => 'Unauthorized'];
-        }
+        $response = app()->handle($tokenRequest);
+
+        return json_decode($response->getContent(), true);
     }
 }

@@ -16,6 +16,11 @@ return new class extends Migration
             $table->uuid('client_id');
             $table->timestamps();
         });
+
+        // add relation to table oauth_clients
+        Schema::table('oauth_personal_access_clients', function (Blueprint $table) {
+            $table->foreign('client_id')->references('id')->on('oauth_clients')->onDelete('cascade');
+        });
     }
 
     /**

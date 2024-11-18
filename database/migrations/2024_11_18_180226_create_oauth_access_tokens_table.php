@@ -21,6 +21,11 @@ return new class extends Migration
             $table->timestamps();
             $table->dateTime('expires_at')->nullable();
         });
+
+        // add relation to table user
+        Schema::table('oauth_access_tokens', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
     }
 
     /**

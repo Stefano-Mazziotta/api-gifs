@@ -19,6 +19,12 @@ return new class extends Migration
             $table->boolean('revoked');
             $table->dateTime('expires_at')->nullable();
         });
+
+
+        // add relation to table user
+        Schema::table('oauth_auth_codes', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
     }
 
     /**
