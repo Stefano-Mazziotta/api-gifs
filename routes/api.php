@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Modules\Auth\Infrastructure\AuthController;
-use App\Modules\Giphy\Infrastructure\GiphyController;
+use App\Modules\Giphy\Infrastructure\GifController;
 
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -16,8 +16,8 @@ Route::middleware('auth:api')->group(function () {
     });
 
     Route::prefix('gifs')->group(function () {
-        Route::get('/search', [GiphyController::class, 'searchGifs']);
-        Route::get('/{id}', [GiphyController::class, 'getGifById']);
-        Route::post('/favorite', [GiphyController::class, 'saveFavoriteGif']);
+        Route::get('/search', [GifController::class, 'searchGifs']);
+        Route::get('/{id}', [GifController::class, 'getGifById']);
+        Route::post('/favorite', [GifController::class, 'saveFavoriteGif']);
     });
 });

@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
-use App\Modules\Giphy\Domain\Repositories\FavoriteGifRepositoryInterface;
-use App\Modules\Giphy\Domain\Repositories\GifRepositoryInterface;
+
 use Illuminate\Support\ServiceProvider;
-use App\Modules\Giphy\Infrastructure\GiphyRepository;
-use App\Modules\Giphy\Infrastructure\FavoriteGifRepository;
 use Laravel\Passport\Passport;
+
+use App\Modules\Gif\Domain\GifRepositoryInterface;
+use App\Modules\Gif\Infrastructure\GiphyRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,7 +17,6 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(GifRepositoryInterface::class, GiphyRepository::class);
-        $this->app->bind(FavoriteGifRepositoryInterface::class, FavoriteGifRepository::class);
     }
 
     /**

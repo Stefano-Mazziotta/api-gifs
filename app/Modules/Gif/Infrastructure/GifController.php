@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Modules\Giphy\Infrastructure;
+namespace App\Modules\Gif\Infrastructure;
 
 use App\Controller;
 use Illuminate\Http\Request;
-use App\Modules\Giphy\Application\SearchGifs;
-use App\Modules\Giphy\Application\GetGifById;
-use App\Modules\Giphy\Application\SaveFavoriteGif;
+use App\Modules\Gif\Application\SearchGifs;
+use App\Modules\Gif\Application\GetGifById;
+use App\Modules\Gif\Application\SaveFavoriteGif;
 
 
-class GiphyController extends Controller
+class GifController extends Controller
 {
     protected $searchGifs;
     protected $getGifById;

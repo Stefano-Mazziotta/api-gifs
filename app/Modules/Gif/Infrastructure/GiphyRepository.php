@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Modules\Giphy\Infrastructure;
+namespace App\Modules\Gif\Infrastructure;
 
-use App\Modules\Giphy\Domain\Repositories\GifRepositoryInterface;
+use App\Modules\Gif\Domain\GifRepositoryInterface;
 use GuzzleHttp\Client;
 
 class GiphyRepository implements GifRepositoryInterface
@@ -37,5 +37,10 @@ class GiphyRepository implements GifRepositoryInterface
         ]);
 
         return json_decode($response->getBody()->getContents(), true);
+    }
+
+    public function SaveFavoriteGif(int $gifId, string $alias, int $userId)
+    {
+        // Save the favorite gif to the database
     }
 }
