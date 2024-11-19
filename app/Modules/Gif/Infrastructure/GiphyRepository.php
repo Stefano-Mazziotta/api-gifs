@@ -42,7 +42,12 @@ class GiphyRepository implements GifRepositoryInterface
             ]
         ]);
 
-        return json_decode($response->getBody()->getContents(), true);
+        $content = json_decode($response->getBody()->getContents(), true);
+        if (!$content['data']['id'] == $id) {
+            throw new \Exception('Gif not found');
+        }
+
+        return $content;
     }
 
     public function SaveFavoriteGif(string $gifId, string $alias, int $userId)

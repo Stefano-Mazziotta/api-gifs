@@ -6,6 +6,9 @@ prex challenge
 
 sail artisan route:list
 
+Personal access client not found. Please create one.
+sail artisan passport:client --personal
+
 # Giphy API
 
 ## Descripción
