@@ -2,28 +2,19 @@
 
 namespace App\Modules\Giphy\Application;
 
-use GuzzleHttp\Client;
+use App\Modules\Giphy\Domain\Repositories\GifRepositoryInterface;
 
 class SearchGifs
 {
-    protected $client;
+    private $gifRepository;
 
-    public function __construct()
+    public function __construct(GifRepositoryInterface $gifRepository)
     {
-        $this->client = new Client(['base_uri' => 'https://api.giphy.com/v1/']);
+        $this->gifRepository = $gifRepository;
     }
 
-    public function execute($query, $limit = 25, $offset = 0)
+    public function execute(string $query, int $limit = 25, int $offset = 0)
     {
-        $response = $this->client->get('gifs/search', [
-            'query' => [
-                'api_key' => env('GIPHY_API_KEY'),
-                'q' => $query,
-                'limit' => $limit,
-                'offset' => $offset,
-            ]
-        ]);
-
-        return json_decode($response->getBody()->getContents(), true);
+        return $this->gifRepository->searchGifs($query, $limit, $offset);
     }
 }

@@ -34,5 +34,9 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'giphy' => [
+        'base_url' => env('GIPHY_BASE_URL'),
+        'api_key' => env('GIPHY_API_KEY'),
+    ]
 
 ];

@@ -8,6 +8,7 @@ use App\Modules\Giphy\Application\SearchGifs;
 use App\Modules\Giphy\Application\GetGifById;
 use App\Modules\Giphy\Application\SaveFavoriteGif;
 
+
 class GiphyController extends Controller
 {
     protected $searchGifs;
@@ -41,13 +42,13 @@ class GiphyController extends Controller
 
     public function saveFavoriteGif(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'gif_id' => 'required|numeric',
             'alias' => 'required|string',
             'user_id' => 'required|numeric',
         ]);
 
-        $favoriteGif = $this->saveFavoriteGif->execute($request->all());
+        $favoriteGif = $this->saveFavoriteGif->execute($data['gif_id'], $data['alias'], $data['user_id']);
 
         return response()->json($favoriteGif, 201);
     }
