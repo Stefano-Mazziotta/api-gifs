@@ -1,15 +1,5 @@
 # Prex Challenge - Laravel API + Giphy API
 
-
-sail artisan route:list
-
-Personal access client not found. Please create one.
-sail artisan passport:client --personal
-
-sail artisan test
-
-# Giphy API
-
 ## Descripción
 
 Este proyecto es una API REST que se integra con la API de Giphy y proporciona servicios de autenticación y búsqueda de GIFs.
@@ -23,12 +13,13 @@ Este proyecto es una API REST que se integra con la API de Giphy y proporciona s
 
 ## Instalación
 
-1. Clonar el repositorio.
+1. Clonar el repositorio
 2. Ejecutar `composer install`
-3. Configurar el archivo `.env`.
+3. Configurar el archivo `.env`
 4. Levantar proyecto `./vendor/bin/sail up`
-5. Correr migraciones, `./vendor/bin/sail artisan migrate`.
-6. Ejecutar `./vendor/bin/sail artisan passport:client --personal `.
+5. Correr migraciones, `./vendor/bin/sail artisan migrate`
+6. Ejecutar `./vendor/bin/sail artisan passport:client --personal `
+7. Listar todas las rutas de la API `./vendor/bin/sail artisan route:list`
 
 ## Endpoints
 - `Post/api/registger`: Alta de usuario.
