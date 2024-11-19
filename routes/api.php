@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Modules\Auth\Infrastructure\AuthController;
-use App\Modules\Giphy\Infrastructure\GifController;
+use App\Modules\Gif\Infrastructure\GifController;
 
 
 Route::post('/register', [AuthController::class, 'register']);
