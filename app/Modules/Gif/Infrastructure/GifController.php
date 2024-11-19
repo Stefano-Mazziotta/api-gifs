@@ -2,7 +2,7 @@
 
 namespace App\Modules\Gif\Infrastructure;
 
-use App\Controller;
+use App\Shared\Controller;
 use Illuminate\Http\Request;
 use App\Modules\Gif\Application\SearchGifs;
 use App\Modules\Gif\Application\GetGifById;

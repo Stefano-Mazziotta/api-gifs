@@ -1,5 +1,5 @@
 <?php
 
-namespace App;
+namespace App\Shared;
 
 abstract class Controller {}

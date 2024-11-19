@@ -2,9 +2,8 @@
 
 namespace App\Modules\Auth\Infrastructure;
 
-use App\Controller;
+use App\Shared\Controller;
 use App\Modules\Auth\Infrastructure\RegisterUserRequest;
-use Illuminate\Http\Request;
 use App\Modules\Auth\Application\LoginUser;
 use App\Modules\Auth\Application\RegisterUser;
 
