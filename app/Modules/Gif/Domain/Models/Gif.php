@@ -4,10 +4,10 @@ namespace App\Modules\Gif\Domain\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FavoriteGif extends Model
+class Gif extends Model
 {
     // Table name
-    protected $table = 'favorite_gifs';
+    protected $table = 'gifs';
 
     // Primary key
     protected $primaryKey = 'id';
@@ -17,10 +17,9 @@ class FavoriteGif extends Model
 
     // Fillable fields
     protected $fillable = [
-        'user_id',
-        'gif_url',
+        'gif_id',
+        'url',
         'title',
-        'description'
     ];
 
     // Hidden fields
@@ -30,8 +29,8 @@ class FavoriteGif extends Model
     ];
 
     // Relationships
-    public function user()
+    public function users()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsToMany('App\Modules\Auth\Domain\Model\User', 'user_favorite_gifs', 'gif_id', 'user_id');
     }
 }

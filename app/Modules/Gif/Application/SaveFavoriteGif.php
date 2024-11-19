@@ -13,7 +13,7 @@ class SaveFavoriteGif
         $this->_gifRepository = $gifRepository;
     }
 
-    public function execute(int $gifId, string $alias, int $userId)
+    public function execute(string $gifId, string $alias, int $userId)
     {
         return $this->_gifRepository->saveFavoriteGif($gifId, $alias, $userId);
     }

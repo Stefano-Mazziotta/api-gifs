@@ -46,4 +46,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function favoriteGifs()
+    {
+        return $this->belongsToMany('App\Modules\Gif\Domain\Models\Gif', 'user_favorite_gifs', 'user_id', 'gif_id');
+    }
 }

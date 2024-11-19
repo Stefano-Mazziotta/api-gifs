@@ -18,6 +18,6 @@ Route::middleware('auth:api')->group(function () {
     Route::prefix('gifs')->group(function () {
         Route::get('/search', [GifController::class, 'searchGifs']);
         Route::get('/{id}', [GifController::class, 'getGifById']);
-        Route::post('/favorite', [GifController::class, 'saveFavoriteGif']);
+        Route::post('/{id}/favorite', [GifController::class, 'saveFavoriteGif']);
     });
 });

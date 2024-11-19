@@ -6,5 +6,5 @@ interface GifRepositoryInterface
 {
     public function searchGifs(string $query, int $limit = 25, int $offset = 0);
     public function getGifById(string $id);
-    public function saveFavoriteGif(int $gifId, string $alias, int $userId);
+    public function saveFavoriteGif(string $gifId, string $alias, int $userId);
 }

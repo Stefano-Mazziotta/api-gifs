@@ -24,32 +24,43 @@ class GifController extends Controller
 
     public function searchGifs(Request $request)
     {
-        $query = $request->input('query');
-        $limit = $request->input('limit', 25);
-        $offset = $request->input('offset', 0);
+        try {
+            $query = $request->input('query');
+            $limit = $request->input('limit', 25);
+            $offset = $request->input('offset', 0);
 
-        $results = $this->searchGifs->execute($query, $limit, $offset);
+            $results = $this->searchGifs->execute($query, $limit, $offset);
 
-        return response()->json($results, 200);
+            return response()->json($results, 200);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 400);
+        }
     }
 
     public function getGifById($id)
     {
-        $result = $this->getGifById->execute($id);
-
-        return response()->json($result, 200);
+        try {
+            $result = $this->getGifById->execute($id);
+            return response()->json($result, 200);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 400);
+        }
     }
 
-    public function saveFavoriteGif(Request $request)
+    public function saveFavoriteGif(string $id, Request $request)
     {
-        $data = $request->validate([
-            'gif_id' => 'required|numeric',
-            'alias' => 'required|string',
-            'user_id' => 'required|numeric',
-        ]);
+        try {
+            $data = $request->validate([
+                'alias' => 'required|string',
+            ]);
 
-        $favoriteGif = $this->saveFavoriteGif->execute($data['gif_id'], $data['alias'], $data['user_id']);
+            $userId = $request->user()->id;
 
-        return response()->json($favoriteGif, 201);
+            $favoriteGif = $this->saveFavoriteGif->execute($id, $data['alias'], $userId);
+
+            return response()->json($favoriteGif, 201);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 400);
+        }
     }
 }
