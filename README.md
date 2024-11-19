@@ -44,6 +44,9 @@ Import the POSTMAN collection from the file `docs/prex-challenge.postman_collect
 - Use Case Diagram.
 - Sequence Diagram.
 - Implement custom Requests in endpoints to validate input.
+- Implement DTO classes.
+- Implement the Criteria Pattern.
+- Implement entity classes.
 - Implement automated tests for all operations.
 - Implement CI/CD.
 - Improve the management of generated access_tokens.
