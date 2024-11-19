@@ -1,52 +1,49 @@
 # Prex Challenge - Laravel API + Giphy API
 
-## Descripción
+## Description
 
-Este proyecto es una API REST que se integra con la API de Giphy y proporciona servicios de autenticación y búsqueda de GIFs.
+This project is a REST API that integrates with the Giphy API and provides authentication and GIF search services.
 
-## Requisitos
+## Requirements
 
 - PHP 8.2
 - Laravel 10
-- MariaDB o MySQL
+- MariaDB or MySQL
 - Docker
 
-## Instalación
+## Installation
 
-1. Clonar el repositorio
-2. Ejecutar `composer install`
-3. Configurar el archivo `.env`
-4. Levantar proyecto `./vendor/bin/sail up`
-5. Correr migraciones, `./vendor/bin/sail artisan migrate`
-6. Ejecutar `./vendor/bin/sail artisan passport:client --personal `
-7. Listar todas las rutas de la API `./vendor/bin/sail artisan route:list`
+1. Clone the repository
+2. Run `composer install`
+3. Configure the `.env` file
+4. Start the project with `./vendor/bin/sail up`
+5. Run migrations with `./vendor/bin/sail artisan migrate`
+6. Execute `./vendor/bin/sail artisan passport:client --personal`
+7. Import the Postman collection, register a user, log in, and interact with the API.
 
 ## Endpoints
-- `Post/api/registger`: Alta de usuario.
-- `POST /api/login`: Autenticación.
-- `GET /api/gifs/search`: Buscar GIFs.
-- `GET /api/gifs/{id}`: Buscar GIF por ID.
-- `POST /api/{id}/favorite`: Guardar GIF favorito.
+- `POST /api/register`: User registration.
+- `POST /api/login`: Authentication.
+- `GET /api/gifs/search`: Search for GIFs.
+- `GET /api/gifs/{id}`: Search for GIF by ID.
+- `POST /api/{id}/favorite`: Save favorite GIF.
 
 ## Tests
 
-Ejecutar `./vendor/bin/sail artisan test` para correr los tests.
+Run `./vendor/bin/sail artisan test` to execute the tests.
 
-## Colección POSTMAN
+## POSTMAN Collection
 
-Importar la colección POSTMAN desde el archivo `docs/prex-challenge.postman_collection.json`.
+Import the POSTMAN collection from the file `docs/prex-challenge.postman_collection.json`.
 
-## DER
-![Diagrama de Entidad-Relación](docs/DER-1.png)
-![Diagrama de Entidad-Relación](docs/DER.pdf)
+## ERD
+![Entity-Relationship Diagram](docs/DER-1.png)
+[Entity-Relationship Diagram PDF](docs/DER.pdf)
 
-## Pendiente
-- Diagrama de Casos de Uso.
-- Diagrama de Secuencia.
-- Implementar Request personalizados en endpoints para validar la entrada.
-- Implementar test automatizados en todas las operativas.
-- Implementar CI/CD
-- Mejorar la gestión de los access_tokens generados.
-
-
-
+## Pending
+- Use Case Diagram.
+- Sequence Diagram.
+- Implement custom Requests in endpoints to validate input.
+- Implement automated tests for all operations.
+- Implement CI/CD.
+- Improve the management of generated access_tokens.
